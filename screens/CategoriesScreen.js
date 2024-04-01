@@ -10,7 +10,9 @@ export default function CategoriesScreen({navigation}) {
     function renderCategoryItem(itemData) {
 
         function pressHandler(){
-            navigation.navigate('FoodOverview')
+            navigation.navigate('FoodOverview',{
+                categoryID:itemData.item.id,  //data içerisindeki id değerini categoryID değerine eşitledik. bu değeri categoryScreen sayfasında kullanacağız.
+            });
         }
 
         return <CategoryGrid
