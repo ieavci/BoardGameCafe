@@ -18,10 +18,17 @@ export default function App() {
 
 
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={IndexCategoryScreen} />
-        <Stack.Screen name="Categories" component={CategoriesScreen} />        
-        <Stack.Screen name="GameCategories" component={GameCategoriesScreen} />        
+      <Stack.Navigator screenOptions={{
+        headerStyle: { backgroundColor: 'white' },
+        headerTintColor:'#ff7a07'
+      }}>
+        <Stack.Screen options={{headerShown:false}} name="Home" component={IndexCategoryScreen} />
+        <Stack.Screen options={{
+          title:'Yiyecek & İçecekler'
+        }} name="Categories" component={CategoriesScreen} />
+        <Stack.Screen options={{
+          title:'Oyun Kategorileri'
+        }} name="GameCategories" component={GameCategoriesScreen} />
         <Stack.Screen name="FoodOverview" component={FoodOverviewScreen} />
       </Stack.Navigator>
     </NavigationContainer>

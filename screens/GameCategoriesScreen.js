@@ -10,7 +10,7 @@ export default function GameCategoriesScreen({navigation}) {
     function renderCategoryItem(itemData) {
 
         function pressHandler(){
-            navigation.navigate('FoodOverview')
+            navigation.navigate('')
         }
 
         return <GameCategoryGrid
