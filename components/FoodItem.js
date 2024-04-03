@@ -1,18 +1,38 @@
 import { StyleSheet, Text, View, Pressable, Image } from 'react-native'
 import React from 'react'
+import { useNavigation } from '@react-navigation/native'
 
 export default function FoodItem({ id, title, imageUrl, affordability, complexity }) {
+
+
+    const navigation = useNavigation();
+
+
+    function FoodItemHandler() {
+        navigation.navigate('FoodDetail',{ //burada verdiğimiz parametre ismi app.js içerisindeki NavigationContainer stackScreendeki name değeri olmalı.
+          
+            foodID:id //FoodOverviewScreen içerisindeki foodItemProps fonksiyonu ile Fooditem'a parametre olarak gönderdiğimiz id değerini kullandık.
+
+        })   
+    }
+
+
+
+
     return (
         <View style={styles.foodItem}>
-            <Pressable style={({ pressed }) => pressed ? styles.pressed : null}>
+            <Pressable
+                style={({ pressed }) => pressed ? styles.pressed : null}
+                onPress={FoodItemHandler}
+            >
                 <View style={styles.innerView}>
                     <View>
                         <Image source={{ uri: imageUrl }} style={styles.image} />
                         <Text style={styles.title}>{title}</Text>
                     </View>
                     <View style={styles.details}>
-                        <Text style={styles.detailItem}>{complexity}</Text>
-                        <Text style={styles.detailItem}>{affordability}</Text>
+                        <Text style={styles.detailItem}>{affordability} TL</Text>
+                        <Text style={styles.detailItem}>{complexity} kcal</Text>
 
                     </View>
                 </View>
@@ -37,8 +57,8 @@ const styles = StyleSheet.create({
         overflow: 'hidden'
     },
     pressed: {
-        opacity:0.9,
-        backgroundColor:'#e6e6e6'
+        opacity: 0.9,
+        backgroundColor: '#e6e6e6'
     },
     innerView: {},
     image: {

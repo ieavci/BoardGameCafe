@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import FoodOverviewScreen from './screens/FoodOverviewScreen';
 import IndexCategoryScreen from './screens/IndexCategoryScreen';
 import GameCategoriesScreen from './screens/GameCategoriesScreen';
+import FoodDetailScreen from './screens/FoodDetailScreen';
 
 
 
@@ -30,6 +31,7 @@ export default function App() {
           title:'Oyun Kategorileri'
         }} name="GameCategories" component={GameCategoriesScreen} />
         <Stack.Screen name="FoodOverview" component={FoodOverviewScreen} />
+        <Stack.Screen options={{title:'İçerik'}} name="FoodDetail" component={FoodDetailScreen} />
       </Stack.Navigator>
     </NavigationContainer>
 

@@ -76,6 +76,8 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily:'sans-serif-light',
+    color:'#000000'
   },
 });
