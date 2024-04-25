@@ -27,7 +27,7 @@ export default function IndexCategoryScreen({ navigation }) {
         ]}
         onPress={navigateToCategoryGrid} // "Yiyecek & İçecekler" butonuna basıldığında CategoryGrid sayfasına yönlendirme
       >
-        <Text style={styles.text}>Yiyecek & İçecekler</Text>
+        <Text style={styles.text}>Yemek & İçecek</Text>
       </Pressable>
       <Pressable
         style={({ pressed }) => [

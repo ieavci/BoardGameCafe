@@ -7,31 +7,82 @@ import FoodOverviewScreen from './screens/FoodOverviewScreen';
 import IndexCategoryScreen from './screens/IndexCategoryScreen';
 import GameCategoriesScreen from './screens/GameCategoriesScreen';
 import FoodDetailScreen from './screens/FoodDetailScreen';
-
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { Ionicons } from '@expo/vector-icons';
 
 
 const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
+
+
+function DrawerNavigator() {
+  return (
+    <Drawer.Navigator screenOptions={{
+
+      headerStyle: {
+        backgroundColor: 'white',
+      },
+      drawerActiveTintColor: '#ff7a07', // Seçili menü öğesi rengi
+
+    }}>
+      <Drawer.Screen
+        name="Home"
+        component={IndexCategoryScreen}
+        options={{
+          headerShown: false,
+          drawerIcon: () => (
+            <Ionicons name="home-sharp" size={24} color="#ff7a07" />
+          ),
+        }}
+
+      />
+      <Drawer.Screen
+        name="Categories"
+        component={CategoriesScreen}
+        options={{
+          title: 'Yemek & İçecek',
+          headerTitleStyle: { color: '#ff7a07' },
+          drawerIcon: () => (
+            <Ionicons name="fast-food" size={24} color="#ff7a07" />
+          ),
+
+        }}
+      />
+      <Drawer.Screen
+        name="GameCategories"
+        component={GameCategoriesScreen}
+        options={{
+          title: 'Oyunlar',
+          headerTitleStyle: { color: '#ff7a07' },
+          drawerIcon: () => (
+            <Ionicons name="extension-puzzle" size={24} color="#ff7a07" />
+          ),
+
+        }}
+      />
+    </Drawer.Navigator>
+  )
+}
+
 
 export default function App() {
   return (
 
-
-
-
     <NavigationContainer>
       <Stack.Navigator screenOptions={{
         headerStyle: { backgroundColor: 'white' },
-        headerTintColor:'#ff7a07'
+        headerTintColor: '#ff7a07',
+
       }}>
-        <Stack.Screen options={{headerShown:false}} name="Home" component={IndexCategoryScreen} />
+
         <Stack.Screen options={{
-          title:'Yiyecek & İçecekler'
-        }} name="Categories" component={CategoriesScreen} />
+          headerShown: false
+        }} name="Drawer" component={DrawerNavigator} />
         <Stack.Screen options={{
-          title:'Oyun Kategorileri'
+          title: 'Oyun Kategorileri'
         }} name="GameCategories" component={GameCategoriesScreen} />
         <Stack.Screen name="FoodOverview" component={FoodOverviewScreen} />
-        <Stack.Screen options={{title:'İçerik'}} name="FoodDetail" component={FoodDetailScreen} />
+        <Stack.Screen options={{ title: 'İçerik' }} name="FoodDetail" component={FoodDetailScreen} />
       </Stack.Navigator>
     </NavigationContainer>
 
@@ -41,10 +92,5 @@ export default function App() {
 
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+
 });

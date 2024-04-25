@@ -9,11 +9,11 @@ export default function FoodItem({ id, title, imageUrl, affordability, complexit
 
 
     function FoodItemHandler() {
-        navigation.navigate('FoodDetail',{ //burada verdiğimiz parametre ismi app.js içerisindeki NavigationContainer stackScreendeki name değeri olmalı.
-          
-            foodID:id //FoodOverviewScreen içerisindeki foodItemProps fonksiyonu ile Fooditem'a parametre olarak gönderdiğimiz id değerini kullandık.
+        navigation.navigate('FoodDetail', { //burada verdiğimiz parametre ismi app.js içerisindeki NavigationContainer stackScreendeki name değeri olmalı.
 
-        })   
+            foodID: id //FoodOverviewScreen içerisindeki foodItemProps fonksiyonu ile Fooditem'a parametre olarak gönderdiğimiz id değerini kullandık.
+
+        })
     }
 
 
@@ -27,6 +27,7 @@ export default function FoodItem({ id, title, imageUrl, affordability, complexit
             >
                 <View style={styles.innerView}>
                     <View>
+
                         <Image source={{ uri: imageUrl }} style={styles.image} />
                         <Text style={styles.title}>{title}</Text>
                     </View>

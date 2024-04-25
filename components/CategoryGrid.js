@@ -10,15 +10,15 @@ export default function CategoryGrid({ title, color,pressFood }) {
     <View style={styles.gridItem}>
       <Pressable
         /*
-            birden fazla css vereceğimiz zaman stillere birer dizi mantığı ile yaklaşıyoruz:
-             {[styles.insideView, { backgroundColor: color }]}
-  
-             styles.button, pressed ? styles.buttonPressed : null ====>
-            styles.button ilk css, pressed akitf (?) ise buttonPressed css dahil et
-            değil ise (:) null bırak
-            */
-        style={({ pressed }) => [
-          styles.button, pressed ? styles.buttonPressed : null
+        birden fazla css vereceğimiz zaman stillere birer dizi mantığı ile yaklaşıyoruz:
+        {[styles.insideView, { backgroundColor: color }]}
+        
+        styles.button, pressed ? styles.buttonPressed : null ====>
+        styles.button ilk css, pressed akitf (?) ise buttonPressed css dahil et
+        değil ise (:) null bırak
+        */
+       style={({ pressed }) => [
+         styles.button, pressed ? styles.buttonPressed : null
         ]}
         onPress={pressFood}
         >
