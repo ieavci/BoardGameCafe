@@ -1,22 +1,32 @@
 import { ScrollView, StyleSheet, Text, View, Image, Pressable } from 'react-native'
 import React from 'react'
+import { useLayoutEffect,useContext } from 'react';
+import { Ionicons } from '@expo/vector-icons';
 import { FOODS } from '../data/dummy-data'
 import FoodsIngredient from '../components/FoodsIngredient';
-import { useLayoutEffect } from 'react';
-import { Ionicons } from '@expo/vector-icons';
-import { useState } from 'react';
+import { FavoritesContext } from '../store/favoritesContext';
 
 export default function FoodDetailScreen({ route, navigation }) {
+
+    const favoriteFoodContext = useContext(FavoritesContext)
+
     const foodID = route.params.foodID;      //ilk foodID bu sayfada işleyeceğimiz kendi oluşturudğumuz, ikinci foodID foodItem foodItemHandler içerisinde elde ettiğimiz foodID.
 
     const selectedFood = FOODS.find((food) => food.id === foodID);
 
+    const foodIsFavorite = favoriteFoodContext.ids.includes(foodID);
 
-
-    const [isFavorite, setIsFavorite] = useState(false);
+    function changeFavorite(){
+        if(foodIsFavorite){
+            favoriteFoodContext.removeFavorite(foodID)
+        }
+        else{
+            favoriteFoodContext.addFavorite(foodID)
+        }
+    }
 
     const pressHandler = () => {
-        setIsFavorite(!isFavorite);
+
         console.log('Tıklandı!')
     };
 
@@ -26,15 +36,16 @@ export default function FoodDetailScreen({ route, navigation }) {
                 return (
                     <Pressable onPress={pressHandler}>
                         <Ionicons
-                            name={isFavorite ? "star" : "star-outline"}
+                            name={foodIsFavorite ? "star" : "star-outline"}
                             size={28}
-                            color={isFavorite ? "orange" : "orange"}
+                            color={"orange"}
+                            onPress={changeFavorite}
                         />
                     </Pressable>
                 )
             }
         });
-    }, [isFavorite, navigation]);
+    }, [changeFavorite, navigation]);
 
     return (
         <ScrollView style={styles.rootContainer}>
@@ -105,23 +116,23 @@ const styles = StyleSheet.create({
         marginTop: 5,
 
     },
-    detailContainer:{
-        justifyContent:'center',
-        alignItems:'center',
-        marginHorizontal:9
+    detailContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginHorizontal: 9
     },
-    detailContainerText:{
-        fontWeight:'300'
+    detailContainerText: {
+        fontWeight: '300'
     },
-    detailContainerInlineText:{
-        textTransform:'none',
-        
+    detailContainerInlineText: {
+        textTransform: 'none',
+
     },
     detailItem: {
         marginHorizontal: 5,
         textTransform: 'uppercase',
         marginBottom: 25,
-        color:'#ff7a07'
+        color: '#ff7a07'
     },
     listContainer: {
         width: '100%',

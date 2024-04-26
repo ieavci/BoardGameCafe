@@ -10,6 +10,7 @@ import FoodDetailScreen from './screens/FoodDetailScreen';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Ionicons } from '@expo/vector-icons';
 import FavoritesContextProvider from './store/favoritesContext';
+import FavoritesScreen from './screens/FavoritesScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -61,6 +62,18 @@ function DrawerNavigator() {
 
         }}
       />
+      <Drawer.Screen
+        name="FoodFavoritesScreen"
+        component={FavoritesScreen}
+        options={{
+          title: 'Favori Yemekler',
+          headerTitleStyle: { color: '#ff7a07' },
+          drawerIcon: () => (
+            <Ionicons name="star" size={24} color="#ff7a07" />
+          ),
+
+        }}
+      />
     </Drawer.Navigator>
   )
 }
@@ -85,6 +98,7 @@ export default function App() {
           }} name="GameCategories" component={GameCategoriesScreen} />
           <Stack.Screen name="FoodOverview" component={FoodOverviewScreen} />
           <Stack.Screen options={{ title: 'İçerik' }} name="FoodDetail" component={FoodDetailScreen} />
+          <Stack.Screen options={{ title: 'Favori Yemekler' }} name="FoodFavoritesScreen" component={FavoritesScreen} />
         </Stack.Navigator>
       </FavoritesContextProvider>
     </NavigationContainer>
