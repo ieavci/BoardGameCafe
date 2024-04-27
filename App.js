@@ -11,11 +11,18 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Ionicons } from '@expo/vector-icons';
 import FavoritesContextProvider from './store/favoritesContext';
 import FavoritesScreen from './screens/FavoritesScreen';
+import { useGameListener } from './config/firebaseConfig';
 
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
+
+const GameListenerComponent = () => {
+  useGameListener(); // Bu hook'u burada çağırın
+
+  return null; // Bu bileşen hiçbir şey render etmiyor, sadece hook'u çağırıyor
+}
 
 function DrawerNavigator() {
   return (
@@ -38,6 +45,7 @@ function DrawerNavigator() {
         }}
 
       />
+
       <Drawer.Screen
         name="Categories"
         component={CategoriesScreen}
@@ -101,6 +109,7 @@ export default function App() {
           <Stack.Screen options={{ title: 'Favori Yemekler' }} name="FoodFavoritesScreen" component={FavoritesScreen} />
         </Stack.Navigator>
       </FavoritesContextProvider>
+      <GameListenerComponent /> 
     </NavigationContainer>
 
   );
