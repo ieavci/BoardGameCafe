@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, onSnapshot } from "firebase/firestore";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 // Your web app's Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyB0_RA1FV2Jbq0tsILg0GRwpWe0lhshJss",
@@ -18,13 +18,31 @@ const db = getFirestore(app);
 
 const gameRef = collection(db, "BoardGameCafeApp")
 
-const useGameListener = () => {
+
+
+
+const useGameListener = (callback) => {
+    const [gameData, setGameData] = useState([]);
+
     useEffect(() => {
-        return onSnapshot(gameRef, snapshot => {
-            console.log(snapshot.docs)
-        });
+        const fetchData = async () => {
+            const db = getFirestore();
+            const gameRef = collection(db, "BoardGameCafeApp");
+            const unsubscribe = onSnapshot(gameRef, (snapshot) => {
+                const data = snapshot.docs.map((doc) => doc.data());
+                setGameData(data);
+                if (typeof callback === 'function') {
+                    callback(data);
+                }
+            });
 
-    }, [])
-}
+            return () => unsubscribe();
+        };
 
-export { db,useGameListener };
+        fetchData();
+    }, [callback]);
+
+    return gameData;
+};
+
+export { db, useGameListener };

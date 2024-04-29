@@ -7,7 +7,7 @@ export default function IndexCategoryScreen({ navigation }) {
     navigation.navigate('Categories'); 
   };
   const navigateToGameCategoryGrid = () => {
-    navigation.navigate('GameCategories'); 
+    navigation.navigate('GameOverViewScreen'); 
   };
 
   return (
