@@ -10,10 +10,14 @@ export default function FoodsIngredient({ data }) {
 }
 
 const styles = StyleSheet.create({
-    ingredientContainer: {
-
+    ingredientContainer: {        
+        padding: 6,        
     },
     text: {
+        borderBottomWidth: 1,
+        borderColor: '#e7e7e7',
+        paddingBottom:5,       
+        paddingHorizontal:10
     }
 })
 

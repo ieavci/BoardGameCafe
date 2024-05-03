@@ -1,8 +1,8 @@
 import { ScrollView, StyleSheet, Text, View, Image, Pressable } from 'react-native'
 import React from 'react'
-import { useLayoutEffect,useContext } from 'react';
+import { useLayoutEffect, useContext, FlatList } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { FOODS } from '../data/dummy-data'
+import { FOODS, CATEGORIES } from '../data/dummy-data'
 import FoodsIngredient from '../components/FoodsIngredient';
 import { FavoritesContext } from '../store/favoritesContext';
 
@@ -16,13 +16,23 @@ export default function FoodDetailScreen({ route, navigation }) {
 
     const foodIsFavorite = favoriteFoodContext.ids.includes(foodID);
 
-    function changeFavorite(){
-        if(foodIsFavorite){
+
+
+    function changeFavorite() {
+        if (foodIsFavorite) {
             favoriteFoodContext.removeFavorite(foodID)
         }
-        else{
+        else {
             favoriteFoodContext.addFavorite(foodID)
         }
+    }
+    // Kategoriyi getirecek fonksiyon
+    function getCategoryTitles(categoryIds) {
+        if (!Array.isArray(categoryIds)) return 'Kategori Yok';
+        return categoryIds.map(categoryId => {
+            const category = CATEGORIES.find(cat => cat.id === categoryId);
+            return category ? category.title : 'Kategori Yok';
+        }).join(', ');
     }
 
     const pressHandler = () => {
@@ -49,10 +59,16 @@ export default function FoodDetailScreen({ route, navigation }) {
 
     return (
         <ScrollView style={styles.rootContainer}>
-            <Image
-                source={{ uri: selectedFood.imageUrl }}
-                style={styles.image}
-            />
+            <View styles={styles.imageContainer}>
+                <Image
+                    source={{ uri: selectedFood.imageUrl }}
+                    style={styles.image}
+                />
+                <View style={styles.overlayButton}>
+                    <Text style={styles.overlayButtonText}>{getCategoryTitles(selectedFood.categoryIds)}</Text>
+                </View>
+            </View>
+
             <View>
                 <Text style={styles.title}>{selectedFood.title}</Text>
             </View>
@@ -71,15 +87,22 @@ export default function FoodDetailScreen({ route, navigation }) {
 
 
             </View>
-            <View style={styles.sil}>
+            <View>
+                <View>
+                    <Text style={styles.subTitle}>İçindekiler</Text>
+                </View>
+
                 <View style={styles.listContainer}>
                     <View style={styles.subTitleContainer}>
-                        <Text style={styles.subTitle}>İçindekiler</Text>
                     </View>
+                    <View style={styles.ingredientsContainer}>
+                        <FoodsIngredient data={selectedFood.ingredients} />
 
-                    <FoodsIngredient data={selectedFood.ingredients} />
+                    </View>
                 </View>
             </View>
+
+
 
         </ScrollView>
     )
@@ -89,37 +112,51 @@ const styles = StyleSheet.create({
     rootContainer: {
         backgroundColor: 'white'
     },
+
     image: {
         width: '100%',
         height: 300,
 
     },
+    overlayButton: {
+        position: 'absolute',
+        top: 10,
+        right: 10,
+        padding: 7,
+        zIndex: 1,
+        backgroundColor: '#f2f2f2',
+        borderRadius: 15,
+        opacity: 0.85,
+    },
+
     title: {
         textAlign: 'left',
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginHorizontal: 15,
         marginTop: 15,
         marginBottom: 10,
+        fontSize: 18,
+        marginLeft: 20,
+        color: '#ff7a07',
+        fontWeight: 'bold'
 
     },
-    sil: {
-        width: '100%',
-        height: 250,
-        backgroundColor: 'gray'
-    },
+
     details: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
         marginBottom: 5,
         marginTop: 5,
+        paddingTop: 22,
+        backgroundColor: '#f2f2f2',
+        borderRadius: 13,
+        marginHorizontal: 15
 
     },
     detailContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-        marginHorizontal: 9
+        marginHorizontal: 9,
+
     },
     detailContainerText: {
         fontWeight: '300'
@@ -135,18 +172,27 @@ const styles = StyleSheet.create({
         color: '#ff7a07'
     },
     listContainer: {
-        width: '100%',
         paddingHorizontal: 10,
+
+
     },
     subTitleContainer: {
         alignItems: 'center',
-        borderBottomWidth: 2,
-        borderColor: '#ff7a07',
-        marginVertical: 5
+        marginVertical: 5,
+
     },
     subTitle: {
-        fontSize: 15
+        fontSize: 18,
+        marginLeft: 20,
+        color: '#ff7a07',
+        fontWeight: 'bold'
     },
+    ingredientsContainer: {
+        backgroundColor: '#f2f2f2',
+        borderRadius: 13,
+        marginBottom: 15,
+        marginHorizontal: 15
+    }
 
 
 })
