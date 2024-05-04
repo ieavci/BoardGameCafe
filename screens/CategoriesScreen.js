@@ -5,7 +5,7 @@ import CategoryGrid from "../components/CategoryGrid";
 
 export default function CategoriesScreen({navigation}) {
     // Sabit numColumns değeri yerine state kullanarak numColumns değerini güncelleyin
-    const [numColumns, setNumColumns] = useState(2);
+    const [numColumns, setNumColumns] = useState(1);
 
     function renderCategoryItem(itemData) {
 
@@ -17,7 +17,7 @@ export default function CategoriesScreen({navigation}) {
 
         return <CategoryGrid
             title={itemData.item.title}
-            color={itemData.item.color}
+            image={itemData.item.image}
             pressFood={pressHandler}
         />
     }

@@ -1,10 +1,11 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { Pressable, StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react'
+import { MaterialIcons } from '@expo/vector-icons';
 
-export default function CategoryGrid({ title, color,pressFood }) {
+export default function CategoryGrid({ title, image, pressFood }) {
 
 
-  
+
   return (
 
     <View style={styles.gridItem}>
@@ -17,15 +18,24 @@ export default function CategoryGrid({ title, color,pressFood }) {
         styles.button ilk css, pressed akitf (?) ise buttonPressed css dahil et
         değil ise (:) null bırak
         */
-       style={({ pressed }) => [
-         styles.button, pressed ? styles.buttonPressed : null
+        style={({ pressed }) => [
+          styles.button, pressed ? styles.buttonPressed : null
         ]}
         onPress={pressFood}
-        >
-        <View style={[styles.insideView, { backgroundColor: color }]}>
-          <Text
-            style={styles.title}>{title}
-          </Text>
+      >
+        <View style={styles.insideView}>
+          <View style={styles.categoryImageContainer}>
+            <Image src={image} style={styles.categoryImage} />
+          </View>
+          <View style={styles.innerDetail}>
+            <Text
+              style={styles.title}>{title}
+            </Text>
+            <MaterialIcons style={styles.go} name="arrow-forward-ios" size={22} color="#ff7a07" />
+           <Text style={styles.innerMenuCount}>12 Menü</Text>  
+          </View>
+
+
         </View>
       </Pressable>
     </View>
@@ -35,7 +45,7 @@ export default function CategoryGrid({ title, color,pressFood }) {
 const styles = StyleSheet.create({
   gridItem: {
     flex: 1,
-    height: 150,
+    height: 100,
     elevation: 4,
     shadowColor: '#171717',
     shadowOffset: {
@@ -44,7 +54,8 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.2,
     shadowRadius: 3,
-    margin: 15,
+    marginHorizontal: 15,
+    marginVertical: 10,
     borderRadius: 20,
     backgroundColor: 'white'
   },
@@ -56,15 +67,37 @@ const styles = StyleSheet.create({
 
   },
   insideView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 20,
+    flexDirection: 'row'
+  },
+  categoryImageContainer: {
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+  },
+  categoryImage: {
+    width: 100,
+    height: 100,
+    borderTopLeftRadius: 20,
+    borderBottomLeftRadius: 20,
 
+  },
+
+  innerDetail: {
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    marginLeft: 20,
+    marginTop: 15,
   },
   title: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: 'normal',
 
+  },
+  go:{
+    marginLeft:150,
+    opacity:0.9,
+    fontWeight:'bold',
+  },
+  innerMenuCount:{
+    fontWeight:'300'
   }
 });
