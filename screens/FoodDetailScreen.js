@@ -80,6 +80,11 @@ export default function FoodDetailScreen({ route, navigation }) {
                     <Text style={styles.detailItem}>{selectedFood.complexity} <Text style={styles.detailContainerInlineText}>kcal</Text></Text>
                 </View>
                 <View style={styles.detailContainer}>
+                    <Ionicons name="time" size={24} color="black" />
+                    <Text style={styles.detailContainerText}>Hazırlanma</Text>
+                    <Text style={styles.detailItem}>{selectedFood.time} <Text style={styles.detailContainerInlineText}>dk.</Text></Text>
+                </View>
+                <View style={styles.detailContainer}>
                     <Ionicons name="pricetag" size={24} color="black" />
                     <Text style={styles.detailContainerText}>Fiyat</Text>
                     <Text style={styles.detailItem}>{selectedFood.affordability} <Text style={styles.detailContainerInlineText}>TL</Text></Text>

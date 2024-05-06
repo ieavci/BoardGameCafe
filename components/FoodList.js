@@ -13,7 +13,7 @@ export default function FoodList({ items }) {
             imageUrl: itemData.item.imageUrl,
             affordability: itemData.item.affordability,
             complexity: itemData.item.complexity,
-
+            time:itemData.item.time
         }
 
 

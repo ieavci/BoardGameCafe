@@ -1,9 +1,12 @@
 import { Pressable, StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react'
 import { MaterialIcons } from '@expo/vector-icons';
+import { FOODS } from "../data/dummy-data"; // dummy-data import edildi
 
-export default function CategoryGrid({ title, image, pressFood }) {
 
+export default function CategoryGrid({ title, image, pressFood,id }) {
+
+  const menuCount = FOODS.filter(food => food.categoryIds.includes(id)).length;
 
 
   return (
@@ -32,7 +35,7 @@ export default function CategoryGrid({ title, image, pressFood }) {
               style={styles.title}>{title}
             </Text>
             <MaterialIcons style={styles.go} name="arrow-forward-ios" size={22} color="#ff7a07" />
-           <Text style={styles.innerMenuCount}>12 Menü</Text>  
+           <Text style={styles.innerMenuCount}>{menuCount} Menü</Text>  
           </View>
 
 

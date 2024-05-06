@@ -6,7 +6,8 @@ class Food {
       affordability,
       complexity,
       imageUrl,
-      ingredients
+      ingredients,
+      time
     ) {
       this.id = id;
       this.categoryIds = categoryIds;
@@ -15,6 +16,7 @@ class Food {
       this.title = title;
       this.imageUrl = imageUrl;
       this.ingredients = ingredients;
+      this.time=time;
     }
   }
   

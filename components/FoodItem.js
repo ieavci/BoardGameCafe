@@ -1,8 +1,10 @@
 import { StyleSheet, Text, View, Pressable, Image } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
+import { Ionicons } from '@expo/vector-icons';
+import styles from './styles/FoodItem';
 
-export default function FoodItem({ id, title, imageUrl, affordability, complexity }) {
+export default function FoodItem({ id, title, imageUrl, affordability, complexity, time }) {
 
 
     const navigation = useNavigation();
@@ -31,10 +33,20 @@ export default function FoodItem({ id, title, imageUrl, affordability, complexit
                         <Image source={{ uri: imageUrl }} style={styles.image} />
                         <Text style={styles.title}>{title}</Text>
                     </View>
-                    <View style={styles.details}>
-                        <Text style={styles.detailItem}>{affordability} TL</Text>
-                        <Text style={styles.detailItem}>{complexity} kcal</Text>
 
+                    <View style={styles.details}>
+                        <View style={styles.detailContainer}>
+                            <Ionicons name="accessibility-sharp" size={24} color="black" />
+                            <Text style={styles.detailContainerText}>{complexity} kcal</Text>
+                        </View>
+                        <View style={styles.detailContainer}>
+                            <Ionicons name="time" size={24} color="black" />
+                            <Text style={styles.detailContainerText}>{time} dk.</Text>
+                        </View>
+                        <View style={styles.detailContainer}>
+                            <Ionicons name="pricetag" size={24} color="black" />
+                            <Text style={styles.detailContainerText}>{affordability} TL</Text>
+                        </View>
                     </View>
                 </View>
             </Pressable>
@@ -42,45 +54,3 @@ export default function FoodItem({ id, title, imageUrl, affordability, complexit
     )
 }
 
-const styles = StyleSheet.create({
-    foodItem: {
-        margin: 12,
-        backgroundColor: 'white',
-        elevation: 4,
-        shadowColor: '#171717',
-        shadowOffset: {
-            width: -2,
-            height: 4,
-        },
-        shadowOpacity: 0.2,
-        shadowRadius: 3,
-        borderRadius: 10,
-        overflow: 'hidden'
-    },
-    pressed: {
-        opacity: 0.9,
-        backgroundColor: '#e6e6e6'
-    },
-    innerView: {},
-    image: {
-        width: '100%',
-        height: 200,
-    },
-    title: {
-        textAlign: 'center',
-        fontSize: 18,
-        fontWeight: 'bold',
-        margin: 8,
-
-    },
-    details: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginBottom: 5,
-    },
-    detailItem: {
-        marginHorizontal: 5
-    },
-
-})
