@@ -36,7 +36,7 @@ function DrawerNavigator() {
 
     }}>
       <Drawer.Screen
-        name="Home"
+        name="Ana Sayfa"
         component={IndexCategoryScreen}
         options={{
           headerShown: false,

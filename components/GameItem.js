@@ -12,12 +12,10 @@ const GameItem = ({ id, name, bggUrl, rank, year, minPlayers, maxPlayers, minTim
   return (
     <TouchableOpacity onPress={navigateToGameDetail}>
       <View style={styles.gameItem}>
-        <Text style={styles.gameName}>{name}</Text>
-        <Text>Rank: {rank}</Text>
-        <Text>Year: {year}</Text>
-        <Text>Players: {minPlayers}-{maxPlayers}</Text>
-        <Text>Time: {minTime}-{maxTime} minutes</Text>
-        <Text>Avg Time: {avgTime} minutes</Text>
+        <Text style={styles.gameName}>{name}</Text>        
+        <Text>Yıl: {year}</Text>
+        <Text>Oyuncu: {minPlayers}-{maxPlayers}</Text>        
+        <Text>Oyun Süresi: {avgTime} dk.</Text>
       </View>
     </TouchableOpacity>
   );
