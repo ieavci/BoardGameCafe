@@ -7,13 +7,15 @@ import { FavoritesContext } from '../store/favoritesContext';
 import { useGameListener } from '../config/firebaseConfig';
 import { useLayoutEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
+import { Linking } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 
 const GameDetailScreen = ({ route }) => {
 
 
 
 
-  const { gameId, name } = route.params;
+  const { gameId, name, bggUrl } = route.params;
   const games = useGameListener();
   const { ids: favoriteGameIds, addFavorite, removeFavorite } = useContext(FavoritesContext);
 
@@ -68,22 +70,41 @@ const GameDetailScreen = ({ route }) => {
       <View>
         <Text style={styles.title}>{selectedGame.names}</Text>
       </View>
+
       <View style={styles.details}>
-        <View style={styles.detailContainer}>
+        <View style={styles.detailOuterContainer}>
+
+          <MaterialIcons style={styles.detailContainerIcon} name="numbers" size={32} color="#ff7a07" />
           <Text style={styles.detailContainerText}>Rank: {selectedGame.rank}</Text>
+
         </View>
-        <View style={styles.detailContainer}>
-          <Text style={styles.detailContainerText}>Year: {selectedGame.year}</Text>
+        <View style={styles.detailOuterContainer}>
+          <Ionicons style={styles.detailContainerIcon} name="calendar" size={32} color="#ff7a07" />
+          <Text style={styles.detailContainerText}>Oyun Yılı: {selectedGame.year}</Text>
         </View>
-        <View style={styles.detailContainer}>
-          <Text style={styles.detailContainerText}>Players: {selectedGame.min_players}-{selectedGame.max_players}</Text>
+        <View style={styles.detailOuterContainer}>
+          <MaterialIcons style={styles.detailContainerIcon} name="groups" size={32} color="#ff7a07" />
+          <Text style={styles.detailContainerText}>Oyuncu Sayısı: {selectedGame.min_players}-{selectedGame.max_players} kişi</Text>
         </View>
-        <View style={styles.detailContainer}>
-          <Text style={styles.detailContainerText}>Time: {selectedGame.min_time}-{selectedGame.max_time} minutes</Text>
+        <View style={styles.detailOuterContainer}>
+          <MaterialIcons style={styles.detailContainerIcon} name="timer" size={32} color="#ff7a07" />
+          <Text style={styles.detailContainerText}>Zaman: {selectedGame.min_time}-{selectedGame.max_time} dk.</Text>
         </View>
-        <View style={styles.detailContainer}>
-          <Text style={styles.detailContainerText}>Avg Time: {selectedGame.avg_time} minutes</Text>
+        <View style={styles.detailOuterContainer}>
+          <MaterialIcons style={styles.detailContainerIcon} name="av-timer" size={32} color="#ff7a07" />
+          <Text style={styles.detailContainerText}>Ortalama Zaman: {selectedGame.avg_time} dk.</Text>
         </View>
+
+        <Pressable
+          onPress={() => Linking.openURL(bggUrl)}
+          style={({ pressed }) => [
+            styles.linkButton,
+            pressed && styles.linkButtonPressed
+          ]}
+        >
+          <Ionicons name="paper-plane" size={25} color="white" />
+          <Text style={styles.linkButtonText}>Nasıl Oynanır?</Text>
+        </Pressable>
       </View>
 
     </ScrollView>
@@ -93,30 +114,64 @@ const GameDetailScreen = ({ route }) => {
 const styles = StyleSheet.create({
   rootContainer: {
     backgroundColor: 'white',
+
   },
   title: {
-    textAlign: 'left',
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginHorizontal: 15,
+    textAlign: 'center',
     marginTop: 15,
     marginBottom: 10,
+    fontSize: 22,
+    color: '#ff7a07',
+    fontWeight: 'bold'
+
   },
-  details: {
+  detailOuterContainer: {
+    backgroundColor: 'white',
+    width: 'auto',
+    paddingVertical: 2,
+    height: 80,
+    marginVertical: 5,
+    justifyContent: 'flex-start',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 5,
-    marginTop: 5,
+    elevation: 4,
+    shadowColor: '#171717',
+    shadowOffset: {
+      width: -2,
+      height: 4,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    borderRadius: 10,
+    marginHorizontal: 15
   },
-  detailContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginHorizontal: 9,
+
+  detailContainerIcon: {
+    marginLeft: 30
   },
   detailContainerText: {
     fontWeight: '300',
+    marginLeft: 8
   },
+  linkButton: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    height: 80,
+    backgroundColor: '#ff7a07',
+    marginTop: 12,
+
+    borderRadius: 10,
+    marginHorizontal: 20
+  },
+  linkButtonText: {
+    fontSize: 18,
+    color: 'white',
+    marginLeft: 5
+  },
+  linkButtonPressed:{
+    opacity:0.8
+  }
 });
 
 export default GameDetailScreen;

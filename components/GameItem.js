@@ -8,7 +8,7 @@ const GameItem = ({ id, name, bggUrl, rank, year, minPlayers, maxPlayers, minTim
   const navigation = useNavigation();
 
   const navigateToGameDetail = () => {
-    navigation.navigate('GameDetailScreen', { gameId: id, name: name }); // Oyun detay sayfasına giderek gameId parametresini iletiyoruz
+    navigation.navigate('GameDetailScreen', { gameId: id, name: name,bggUrl: bggUrl }); // Oyun detay sayfasına giderek gameId parametresini iletiyoruz
   };
 
   return (
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
 
   pressed: {
     opacity: 0.7,
-
+    
   },
   gameItem: {
     padding: 20,
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   },
   gameItemIngredients: {
     flex: 6,
-    marginHorizontal:10
+    marginHorizontal: 10
   },
   detailContainer: {
     justifyContent: 'center',
