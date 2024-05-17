@@ -27,6 +27,7 @@ export default function CategoriesScreen({ navigation }) {
 
     return (
         <FlatList
+            style={styles.Body}
             data={CATEGORIES}
             keyExtractor={(item) => item.id}
             renderItem={renderCategoryItem}
@@ -36,4 +37,8 @@ export default function CategoriesScreen({ navigation }) {
     )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    Body:{
+        backgroundColor:'white'
+    }
+})

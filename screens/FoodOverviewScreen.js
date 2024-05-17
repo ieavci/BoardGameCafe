@@ -23,16 +23,24 @@ export default function FoodOverviewScreen({ route, navigation }) {
     navigation.setOptions({
       title: categoryTitle
     });
-  },[navigation,categoryID])
-
-  
+  }, [navigation, categoryID])
 
 
-  
+
+
+
 
   return (
-    <FoodList items={displayedFoods}/>
+    <View style={styles.a}>
+      <FoodList items={displayedFoods}
+
+      />
+    </View>
   )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+a:{
+  backgroundColor:'white'
+}
+})

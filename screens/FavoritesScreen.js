@@ -19,7 +19,12 @@ export default function FavoritesScreen() {
     }
     else {
         return (
-            <FoodList items={favoriteFoods} />
+           
+            <FoodList
+                items={favoriteFoods}
+                
+            />
+           
         )
     }
 
@@ -27,14 +32,17 @@ export default function FavoritesScreen() {
 }
 
 const styles = StyleSheet.create({
-    MessageContainer:{
-        justifyContent:"center",
-        alignItems:"center",
-        flex:1
+    Body:{
+        backgroundColor:'white'
+    },
+    MessageContainer: {
+        justifyContent: "center",
+        alignItems: "center",
+        flex: 1
     },
     Message: {
         color: "#ff7a07",
-        fontSize:16,
-        fontWeight:"bold"
+        fontSize: 16,
+        fontWeight: "bold"
     }
 })
