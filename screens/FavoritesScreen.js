@@ -12,19 +12,19 @@ export default function FavoritesScreen() {
 
     if (favoriteFoods.length === 0) {
         return (
-            <View style={styles.MessageContainer}>
+            <View style={styles.MessageContainer}> 
                 <Text style={styles.Message}>Henüz Favori Ürünlerinizi Seçmediniz.</Text>
             </View>
         )
     }
     else {
         return (
-           
+
             <FoodList
                 items={favoriteFoods}
-                
+
             />
-           
+
         )
     }
 
@@ -32,8 +32,8 @@ export default function FavoritesScreen() {
 }
 
 const styles = StyleSheet.create({
-    Body:{
-        backgroundColor:'white'
+    Body: {
+        backgroundColor: 'white'
     },
     MessageContainer: {
         justifyContent: "center",
